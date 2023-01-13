@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="source\" />
+    <Folder Include="source\Enum\Events\" />
+    <Folder Include="source\Enum\Internal\" />
     <Folder Include="source\Enum\SaltyChat\" />
     <Folder Include="source\Models\" />
     <Folder Include="source\Models\SaltyChat\" />
