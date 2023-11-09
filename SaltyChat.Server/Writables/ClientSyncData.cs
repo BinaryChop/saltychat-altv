@@ -6,17 +6,19 @@ namespace SaltyChat.Server.Writables
 {
     public class ClientSyncData:IWritable
     {
-        private IEnumerable<VoiceClient> _voiceClients { get; set; }
+        private IEnumerable<VoiceClient> voiceClients;
+
+        private IEnumerable<VoiceClient> VoiceClients { get => voiceClients; set => voiceClients = value; }
 
         public ClientSyncData(IEnumerable<VoiceClient> voiceClients)
         {
-            _voiceClients = voiceClients;
+            VoiceClients = voiceClients;
         }
 
         public void OnWrite(IMValueWriter writer)
         {
             writer.BeginArray();
-            foreach (var voiceClient in _voiceClients)
+            foreach (var voiceClient in VoiceClients)
             {
                 writer.BeginObject();
                 writer.Name("id");

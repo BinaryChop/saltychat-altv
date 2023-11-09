@@ -4,11 +4,11 @@ namespace SaltyChat.Server.Writables
 {
     public class ClientInitData : IWritable
     {
-        private string _teamSpeakName { get; set; }
+        private string TeamSpeakName { get; set; }
 
         public ClientInitData(string teamSpeakName)
         {
-            _teamSpeakName = teamSpeakName;
+            TeamSpeakName = teamSpeakName;
         }
 
         public void OnWrite(IMValueWriter writer)
@@ -17,7 +17,7 @@ namespace SaltyChat.Server.Writables
             writer.Name("serverIdentifier");
             writer.Value(VoiceManager.Configuration.ServerIdentifier);
             writer.Name("teamSpeakName");
-            writer.Value(_teamSpeakName);
+            writer.Value(TeamSpeakName);
             writer.Name("soundPack");
             writer.Value(VoiceManager.Configuration.SoundPack);
             writer.Name("ingameChannel");

@@ -13,7 +13,7 @@ namespace SaltyChat.Server.Models
         internal RadioChannelMember[] Members => _members.ToArray();
         private readonly List<RadioChannelMember> _members = new();
 
-        private object _memberLock = new object();
+        private readonly object _memberLock = new object();
 
         #endregion
 
@@ -108,7 +108,7 @@ namespace SaltyChat.Server.Models
                 {
                     foreach (var client in VoiceManager.Instance.VoiceClients.Where(v => _members.All(m => m.VoiceClient != v)))
                     {
-                        client.Player.Emit("SaltyChat:PlayerIsSendingRelayed", sendingMember.VoiceClient.Player, Name, false, false, sendingMember.VoiceClient.Player.Position, false, new string[0]);
+                        client.Player.Emit("SaltyChat:PlayerIsSendingRelayed", sendingMember.VoiceClient.Player, Name, false, false, sendingMember.VoiceClient.Player.Position, false, Array.Empty<string>());
                     }
                 }
             }
@@ -145,7 +145,7 @@ namespace SaltyChat.Server.Models
 
         private void UpdateMemberStateBag()
         {
-            VoiceManager.Instance.SetStateBagKey($"{State.SaltyChat_RadioChannelMember}:{this.Name}", this.Members.Select(m => m.VoiceClient.TeamSpeakName).ToArray());
+            VoiceManager.SetStateBagKey($"{State.SaltyChat_RadioChannelMember}:{this.Name}", this.Members.Select(m => m.VoiceClient.TeamSpeakName).ToArray());
         }
 
         private void UpdateSenderStateBag()
@@ -163,8 +163,8 @@ namespace SaltyChat.Server.Models
                     }
                 );
             }
-            
-            VoiceManager.Instance.SetStateBagKey($"{State.SaltyChat_RadioChannelSender}:{this.Name}", sender);
+
+            VoiceManager.SetStateBagKey($"{State.SaltyChat_RadioChannelSender}:{this.Name}", sender);
         }
 
         private void BroadcastEvent(string eventName, string channelName, object[] members)

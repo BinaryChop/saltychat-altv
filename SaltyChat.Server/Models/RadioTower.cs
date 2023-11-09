@@ -6,7 +6,7 @@ namespace SaltyChat.Server.Models
 {
     public class RadioTowers : IWritable
     {
-        private IEnumerable<RadioTower> _radioTowers;
+        private readonly IEnumerable<RadioTower> _radioTowers;
 
         public RadioTowers(IEnumerable<RadioTower> radioTowers)
         {

@@ -207,7 +207,7 @@ namespace SaltyChat.Server
             EndCall(phoneCall);
         }
 
-        public bool IsApplicableCall(PhoneCall call, IPlayer particiant1, IPlayer particiant2)
+        public static bool IsApplicableCall(PhoneCall call, IPlayer particiant1, IPlayer particiant2)
         {
             return call.Caller == particiant1 && call.Called == particiant2 ||
             call.Caller == particiant2 && call.Called == particiant1;
@@ -300,9 +300,9 @@ namespace SaltyChat.Server
         #endregion
 
         #region Methods: Misc
-        internal void SetStateBagKey(string key, object value) => Alt.SetSyncedMetaData(key,value);
+        internal static void SetStateBagKey(string key, object value) => Alt.SetSyncedMetaData(key, value);
 
-        internal object GetStateBagKey(string key)
+        internal static object GetStateBagKey(string key)
         {
             if (Alt.GetSyncedMetaData(key, out object result))
                 return result;
@@ -322,7 +322,7 @@ namespace SaltyChat.Server
             return name;
         }
 
-        private bool IsVersionAccepted(string version)
+        private static bool IsVersionAccepted(string version)
         {
             if (!string.IsNullOrWhiteSpace(version))
             {
